@@ -1,0 +1,9 @@
+version: '2'
+
+services:
+  heizung:
+    hostname: speedportmqtt
+    image: pharndt/speedportmqtt
+    volumes:
+     - ./config:/var/lib/speedport-to-mqtt-gw:ro
+    restart: always 
