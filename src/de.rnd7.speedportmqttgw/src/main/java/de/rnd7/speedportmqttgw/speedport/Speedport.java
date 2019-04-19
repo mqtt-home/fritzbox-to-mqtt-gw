@@ -35,7 +35,7 @@ public class Speedport {
 
 			try (CloseableHttpResponse response = httpclient.execute(httpGet)) {
 				return new JSONObject(EntityUtils.toString(response.getEntity(), StandardCharsets.UTF_8)
-						.replaceAll("'(\\d+)'", "$1").replace("'", "\""));
+						.replaceAll("'(-?\\d+)'", "$1").replace("'", "\""));
 			}
 		}
 	}
