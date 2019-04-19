@@ -7,7 +7,6 @@ import org.eclipse.paho.client.mqttv3.MqttConnectOptions;
 import org.eclipse.paho.client.mqttv3.MqttException;
 import org.eclipse.paho.client.mqttv3.MqttMessage;
 import org.eclipse.paho.client.mqttv3.persist.MemoryPersistence;
-import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -66,9 +65,9 @@ public class GwMqttClient {
 	}
 
 	@Subscribe
-	public void publish(final JSONObject message) {
-		final String topic = this.config.getFullMessageTopic();
-		final String valueString = message.toString();
+	public void publish(final Message message) {
+		final String topic = this.config.getFullMessageTopic() + "/" + message.getTopic();
+		final String valueString = message.getData().toString();
 
 		LOGGER.info("{} = {}", topic, valueString);
 

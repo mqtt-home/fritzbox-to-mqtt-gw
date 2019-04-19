@@ -14,6 +14,7 @@ import com.google.common.eventbus.EventBus;
 import de.rnd7.speedportmqttgw.config.Config;
 import de.rnd7.speedportmqttgw.config.ConfigParser;
 import de.rnd7.speedportmqttgw.mqtt.GwMqttClient;
+import de.rnd7.speedportmqttgw.mqtt.Message;
 import de.rnd7.speedportmqttgw.speedport.Speedport;
 
 public class Main {
@@ -45,8 +46,8 @@ public class Main {
 		try {
 			final Speedport speedport = new Speedport(this.config.getSpeedportUrl(),
 					this.config.getSpeedportPassword());
-			this.eventBus.post(speedport.downloadInfo("dsl"));
-			this.eventBus.post(speedport.downloadInfo("lteinfo"));
+			this.eventBus.post(new Message("dsl", speedport.downloadInfo("dsl")));
+			this.eventBus.post(new Message("lte", speedport.downloadInfo("lteinfo")));
 		} catch (final IOException e) {
 			LOGGER.error(e.getMessage(), e);
 		}
