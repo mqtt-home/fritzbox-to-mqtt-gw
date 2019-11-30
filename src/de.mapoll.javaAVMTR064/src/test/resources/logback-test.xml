@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration
+    xmlns="http://ch.qos.logback/xml/ns/logback"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://ch.qos.logback/xml/ns/logback http://ch.qos.logback/xml/ns/logback/logback.xsd">
+
+    <statusListener class="ch.qos.logback.core.status.NopStatusListener" />
+
+        <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+                <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+                        <Pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{36}.%M\(%line\) - %msg%n
+                        </Pattern>
+                </encoder>
+        </appender>
+
+		<!-- change log level here to get more output -->
+		<logger name="org.apache.http" level="info" />
+		<!-- change log level here to get more output -->
+		<logger name="org.apache.http.wire" level="info" />
+
+        <logger name="org.reflections.Reflections" level="info" />
+
+        <root level="info">
+                <appender-ref ref="CONSOLE" />
+        </root>
+
+</configuration>
