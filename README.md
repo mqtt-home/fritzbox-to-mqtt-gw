@@ -1,7 +1,7 @@
-# speedport-to-mqtt-gw
+# fritzbox-to-mqtt-gw
 
-Convert the Speedport Hybrid connection data 
-for `lte` and `dsl` to mqtt topics.
+Convert the FritzBox connection data 
+for `dsl` to mqtt messages.
 
 # build
 
@@ -15,4 +15,8 @@ cd ./production
 docker-compose up -d
 ```
 
-Thanks to @melle for the [l33tport](https://github.com/melle/l33tport) script
+This project is based on:
+https://github.com/mirthas/FritzTR064
+
+with patches from:
+https://github.com/a-brandt/FritzTR064

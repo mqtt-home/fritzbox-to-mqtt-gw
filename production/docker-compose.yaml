@@ -1,9 +1,9 @@
 version: '2'
 
 services:
-  speedportmqtt:
-    hostname: speedportmqtt
-    image: pharndt/speedportmqtt
+  fritzboxmqtt:
+    hostname: fritzboxmqtt
+    image: pharndt/fritzboxmqtt
     volumes:
-     - ./config:/var/lib/speedport-to-mqtt-gw:ro
+     - ./config:/var/lib/fritzbox-to-mqtt-gw:ro
     restart: always 

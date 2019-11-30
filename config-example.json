@@ -1,6 +1,7 @@
 {
-	"speedport-url": "http://192.168.2.1",
-	"speedport-password": "SECRET-PASSWORD",
+	"fritzbox-host": "192.168.2.1",
+	"fritzbox-username": "USERNAME",
+	"fritzbox-password": "PASSWORD",
 	"mqtt-url": "tcp://192.168.2.2:1883",
 	
 	"message-interval": 60,

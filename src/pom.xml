@@ -2,8 +2,8 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
-	<groupId>de.rnd7.speedportmqttgw</groupId>
-	<artifactId>de.rnd7.speedportmqttgw.parent</artifactId>
+	<groupId>de.rnd7.fritzboxmqttgw</groupId>
+	<artifactId>de.rnd7.fritzboxmqttgw.parent</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 
 	<packaging>pom</packaging>
@@ -22,10 +22,10 @@
 			<plugin>
 				<artifactId>maven-assembly-plugin</artifactId>
 				<configuration>
-					<finalName>speedport-to-mqtt-gw</finalName>
+					<finalName>fritzbox-to-mqtt-gw</finalName>
 					<archive>
 						<manifest>
-							<mainClass>de.rnd7.speedportmqttgw.Main</mainClass>
+							<mainClass>de.rnd7.fritzboxmqttgw.Main</mainClass>
 						</manifest>
 					</archive>
 					<descriptorRefs>
@@ -51,10 +51,19 @@
 			<id>Eclipse Paho Repo</id>
 			<url>https://repo.eclipse.org/content/repositories/paho-releases/</url>
 		</repository>
+ 		<repository>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+			<id>bintray-kaklakariada-maven</id>
+			<name>bintray</name>
+			<url>https://dl.bintray.com/kaklakariada/maven</url>
+		</repository>
 	</repositories>
 
 	<modules>
-		<module>de.rnd7.speedportmqttgw</module>
+		<module>de.rnd7.fritzboxmqttgw</module>
+		<module>de.mapoll.javaAVMTR064</module>
 	</modules>
 
 </project>

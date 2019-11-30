@@ -1,4 +1,4 @@
-package de.rnd7.speedportmqttgw.config;
+package de.rnd7.fritzboxmqttgw.config;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -28,8 +28,9 @@ public class ConfigParser {
 		final Config config = new Config();
 
 		final JSONObject jsonObject = new JSONObject(IOUtils.toString(in, StandardCharsets.UTF_8));
-		config.setSpeedportUrl(jsonObject.getString("speedport-url"));
-		config.setSpeedportPassword(jsonObject.getString("speedport-password"));
+		config.setFritzboxHost(jsonObject.getString("fritzbox-host"));
+		config.setFritzboxPassword(jsonObject.getString("fritzbox-password"));
+		config.setFritzboxUsername(jsonObject.getString("fritzbox-username"));
 		config.setMqttBroker(jsonObject.getString("mqtt-url"));
 		config.setPollingInterval(Duration.ofSeconds(jsonObject.getInt(MESSAGE_INTERVAL)));
 		config.setFullMessageTopic(jsonObject.getString(FULL_MESSAGE_TOPIC));

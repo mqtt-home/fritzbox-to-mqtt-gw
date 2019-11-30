@@ -1,4 +1,4 @@
-package de.rnd7.speedportmqttgw.mqtt;
+package de.rnd7.fritzboxmqttgw.mqtt;
 
 import org.json.JSONObject;
 

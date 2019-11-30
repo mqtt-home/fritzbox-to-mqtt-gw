@@ -1,4 +1,4 @@
-package de.rnd7.speedportmqttgw.config;
+package de.rnd7.fritzboxmqttgw.config;
 
 import java.time.Duration;
 
@@ -7,8 +7,9 @@ public class Config {
 
 	private Duration pollingInterval;
 	private String fullMessageTopic;
-	private String speedportUrl;
-	private String speedportPassword;
+	private String fritzboxHost;
+	private String fritzboxUsername;
+	private String fritzboxPassword;
 
 	public void setMqttBroker(final String mqttBroker) {
 		this.mqttBroker = mqttBroker;
@@ -34,20 +35,28 @@ public class Config {
 		return this.fullMessageTopic;
 	}
 
-	public void setSpeedportUrl(final String speedportUrl) {
-		this.speedportUrl = speedportUrl;
+	public void setFritzboxHost(final String fritzboxHost) {
+		this.fritzboxHost = fritzboxHost;
 	}
 
-	public String getSpeedportUrl() {
-		return this.speedportUrl;
+	public String getFritzboxHost() {
+		return this.fritzboxHost;
 	}
 
-	public void setSpeedportPassword(final String speedportPassword) {
-		this.speedportPassword = speedportPassword;
+	public void setFritzboxUsername(String fritzboxUsername) {
+		this.fritzboxUsername = fritzboxUsername;
+	}
+	
+	public String getFritzboxUsername() {
+		return fritzboxUsername;
+	}
+	
+	public void setFritzboxPassword(final String fritzboxPassword) {
+		this.fritzboxPassword = fritzboxPassword;
 	}
 
-	public String getSpeedportPassword() {
-		return this.speedportPassword;
+	public String getFritzboxPassword() {
+		return this.fritzboxPassword;
 	}
 
 }

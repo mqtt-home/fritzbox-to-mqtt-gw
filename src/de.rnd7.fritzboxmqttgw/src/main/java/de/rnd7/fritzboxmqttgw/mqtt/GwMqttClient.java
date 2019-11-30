@@ -1,4 +1,4 @@
-package de.rnd7.speedportmqttgw.mqtt;
+package de.rnd7.fritzboxmqttgw.mqtt;
 
 import java.util.Optional;
 
@@ -12,11 +12,11 @@ import org.slf4j.LoggerFactory;
 
 import com.google.common.eventbus.Subscribe;
 
-import de.rnd7.speedportmqttgw.config.Config;
+import de.rnd7.fritzboxmqttgw.config.Config;
 
 public class GwMqttClient {
 	private static final int QOS = 2;
-	private static final String CLIENTID = "speedport-mqtt-gw";
+	private static final String CLIENTID = "fritzbox-mqtt-gw";
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(GwMqttClient.class);
 

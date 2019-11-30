@@ -1,4 +1,4 @@
-package de.rnd7.speedportmqttgw;
+package de.rnd7.fritzboxmqttgw;
 
 import java.io.File;
 import java.io.IOException;
@@ -11,11 +11,11 @@ import org.slf4j.LoggerFactory;
 
 import com.google.common.eventbus.EventBus;
 
-import de.rnd7.speedportmqttgw.config.Config;
-import de.rnd7.speedportmqttgw.config.ConfigParser;
-import de.rnd7.speedportmqttgw.mqtt.GwMqttClient;
-import de.rnd7.speedportmqttgw.mqtt.Message;
-import de.rnd7.speedportmqttgw.speedport.Speedport;
+import de.rnd7.fritzboxmqttgw.config.Config;
+import de.rnd7.fritzboxmqttgw.config.ConfigParser;
+import de.rnd7.fritzboxmqttgw.mqtt.GwMqttClient;
+import de.rnd7.fritzboxmqttgw.mqtt.Message;
+import de.rnd7.fritzboxmqttgw.fritzbox.Fritzbox;
 
 public class Main {
 
@@ -44,10 +44,10 @@ public class Main {
 
 	private void exec() {
 		try {
-			final Speedport speedport = new Speedport(this.config.getSpeedportUrl(),
-					this.config.getSpeedportPassword());
-			this.eventBus.post(new Message("dsl", speedport.downloadInfo("dsl")));
-			this.eventBus.post(new Message("lte", speedport.downloadInfo("lteinfo")));
+			final Fritzbox fritzbox = new Fritzbox(this.config.getFritzboxHost(),
+					this.config.getFritzboxUsername(), 
+					this.config.getFritzboxPassword());
+			this.eventBus.post(new Message("dsl", fritzbox.downloadInfo()));
 		} catch (final IOException e) {
 			LOGGER.error(e.getMessage(), e);
 		}

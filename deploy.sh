@@ -1,2 +1,2 @@
 #!/bin/bash
-docker push pharndt/speedportmqtt:latest
+docker push pharndt/fritzboxmqtt:latest
