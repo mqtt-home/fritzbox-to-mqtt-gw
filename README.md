@@ -20,3 +20,6 @@ https://github.com/mirthas/FritzTR064
 
 with patches from:
 https://github.com/a-brandt/FritzTR064
+
+Grafana Dashboard adapted from:
+https://blog.butenostfreesen.de/2018/10/11/Fritz-Box-Monitoring-mit-Grafana-und-Raspberry/
