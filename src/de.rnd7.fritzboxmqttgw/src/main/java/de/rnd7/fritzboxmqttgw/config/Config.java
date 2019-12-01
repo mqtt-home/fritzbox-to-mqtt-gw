@@ -4,6 +4,8 @@ import java.time.Duration;
 
 public class Config {
 	private String mqttBroker;
+	private String mqttUsername = "";
+	private String mqttPassword = "";
 
 	private Duration pollingInterval;
 	private String fullMessageTopic;
@@ -17,6 +19,22 @@ public class Config {
 
 	public String getMqttBroker() {
 		return this.mqttBroker;
+	}
+
+	public void setUsername(final String username) {
+		this.mqttUsername = username;
+	}
+
+	public String getUsername() {
+		return this.mqttUsername;
+	}
+
+	public void setPassword(final String password) {
+		this.mqttPassword = password;
+	}
+
+	public String getPassword() {
+		return this.mqttPassword;
 	}
 
 	public void setPollingInterval(final Duration pollingInterval) {

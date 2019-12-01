@@ -13,6 +13,8 @@ import org.json.JSONObject;
 public class ConfigParser {
 	private static final String FULL_MESSAGE_TOPIC = "full-message-topic";
 	private static final String MESSAGE_INTERVAL = "message-interval";
+	private static final String USERNAME = "username";
+	private static final String PASSWORD = "password";
 
 	private ConfigParser() {
 
@@ -34,6 +36,12 @@ public class ConfigParser {
 		config.setMqttBroker(jsonObject.getString("mqtt-url"));
 		config.setPollingInterval(Duration.ofSeconds(jsonObject.getInt(MESSAGE_INTERVAL)));
 		config.setFullMessageTopic(jsonObject.getString(FULL_MESSAGE_TOPIC));
+		if (jsonObject.has(USERNAME)) {
+			config.setUsername(jsonObject.getString(USERNAME));
+		}
+		if (jsonObject.has(PASSWORD)) {
+			config.setPassword(jsonObject.getString(PASSWORD));
+		}
 
 		return config;
 
