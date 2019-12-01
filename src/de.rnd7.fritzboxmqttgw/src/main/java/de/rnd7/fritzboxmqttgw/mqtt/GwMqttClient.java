@@ -37,6 +37,12 @@ public class GwMqttClient {
 			final MqttClient result = new MqttClient(this.config.getMqttBroker(), CLIENTID, this.persistence);
 			final MqttConnectOptions connOpts = new MqttConnectOptions();
 			connOpts.setCleanSession(true);
+
+			this.config.getMqttCredentials().ifPresent(credentials -> {
+				connOpts.setUserName(credentials.getUsername());
+				connOpts.setPassword(credentials.getPassword().toCharArray());
+			});
+
 			result.connect(connOpts);
 
 			return Optional.of(result);
