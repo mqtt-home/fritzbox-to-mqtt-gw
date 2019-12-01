@@ -137,6 +137,25 @@ public class Response {
 
 		return ret;
 	}
+	
+	public long getValueAsLong(String argument) throws ClassCastException, NoSuchFieldException {
+		if (!argumentState.containsKey(argument) || !data.containsKey(argument)) {
+			throw new NoSuchFieldException(argument);
+		}
+		if (stateToType.get(argumentState.get(argument)) != Long.class) {
+			throw new ClassCastException(argument);
+		}
+
+		long ret = -1;
+
+		try {
+			ret = Long.parseLong(data.get(argument));
+		} catch (NumberFormatException e) {
+			throw new ClassCastException(argument + " " + e.getMessage());
+		}
+
+		return ret;
+	}
 
 	public boolean getValueAsBoolean(String argument) throws ClassCastException, NoSuchFieldException {
 		if (!argumentState.containsKey(argument) || !data.containsKey(argument)) {

@@ -41,24 +41,24 @@ public class Fritzbox {
 
 	private void linkConfig(FritzConnection connection, JSONObject result) throws IOException, NoSuchFieldException {
 		Response response = get(connection, "WANDSLLinkConfig:1", "GetStatistics");
-		result.put("NewATMCRCErrors", response.getValueAsInteger("NewATMCRCErrors"));
-		result.put("NewATMTransmittedBlocks", response.getValueAsInteger("NewATMTransmittedBlocks"));
-		result.put("NewATMReceivedBlocks", response.getValueAsInteger("NewATMReceivedBlocks"));
-		result.put("NewAAL5CRCErrors", response.getValueAsInteger("NewAAL5CRCErrors"));
+		result.put("NewATMCRCErrors", response.getValueAsLong("NewATMCRCErrors"));
+		result.put("NewATMTransmittedBlocks", response.getValueAsLong("NewATMTransmittedBlocks"));
+		result.put("NewATMReceivedBlocks", response.getValueAsLong("NewATMReceivedBlocks"));
+		result.put("NewAAL5CRCErrors", response.getValueAsLong("NewAAL5CRCErrors"));
 	}
 	
 	private void ethernetInterfaceConfig(FritzConnection connection, JSONObject result) throws IOException, NoSuchFieldException {
 		Response response = get(connection, "LANEthernetInterfaceConfig:1", "GetStatistics");
-		result.put("NewBytesReceived", response.getValueAsInteger("NewBytesReceived"));
-		result.put("NewBytesSent", response.getValueAsInteger("NewBytesSent"));
-		result.put("NewPacketsReceived", response.getValueAsInteger("NewPacketsReceived"));
-		result.put("NewPacketsSent", response.getValueAsInteger("NewPacketsSent"));
+		result.put("NewBytesReceived", response.getValueAsLong("NewBytesReceived"));
+		result.put("NewBytesSent", response.getValueAsLong("NewBytesSent"));
+		result.put("NewPacketsReceived", response.getValueAsLong("NewPacketsReceived"));
+		result.put("NewPacketsSent", response.getValueAsLong("NewPacketsSent"));
 	}
 	
 	private void wanInterfaceConfig(FritzConnection connection, JSONObject result) throws IOException, NoSuchFieldException {
 		Response response = get(connection, "WANCommonInterfaceConfig:1", "GetCommonLinkProperties");
-		result.put("NewLayer1DownstreamMaxBitRate", response.getValueAsInteger("NewLayer1DownstreamMaxBitRate"));
-		result.put("NewLayer1UpstreamMaxBitRate", response.getValueAsInteger("NewLayer1UpstreamMaxBitRate"));
+		result.put("NewLayer1DownstreamMaxBitRate", response.getValueAsLong("NewLayer1DownstreamMaxBitRate"));
+		result.put("NewLayer1UpstreamMaxBitRate", response.getValueAsLong("NewLayer1UpstreamMaxBitRate"));
 		result.put("NewPhysicalLinkStatus", response.getValueAsString("NewPhysicalLinkStatus").equalsIgnoreCase("up") ? 1 : 0);
 	}
 	
