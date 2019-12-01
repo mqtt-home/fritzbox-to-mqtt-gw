@@ -142,7 +142,7 @@ public class Response {
 		if (!argumentState.containsKey(argument) || !data.containsKey(argument)) {
 			throw new NoSuchFieldException(argument);
 		}
-		if (stateToType.get(argumentState.get(argument)) != Long.class) {
+		if (stateToType.get(argumentState.get(argument)) != Long.class && stateToType.get(argumentState.get(argument)) != Integer.class) {
 			throw new ClassCastException(argument);
 		}
 
