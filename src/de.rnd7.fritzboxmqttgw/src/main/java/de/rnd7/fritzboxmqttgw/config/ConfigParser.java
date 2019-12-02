@@ -10,6 +10,8 @@ import java.time.Duration;
 import org.apache.commons.io.IOUtils;
 import org.json.JSONObject;
 
+import de.rnd7.fritzboxmqttgw.config.Config.MqttCredentials;
+
 public class ConfigParser {
 	private static final String FULL_MESSAGE_TOPIC = "full-message-topic";
 	private static final String MESSAGE_INTERVAL = "message-interval";
@@ -36,11 +38,11 @@ public class ConfigParser {
 		config.setMqttBroker(jsonObject.getString("mqtt-url"));
 		config.setPollingInterval(Duration.ofSeconds(jsonObject.getInt(MESSAGE_INTERVAL)));
 		config.setFullMessageTopic(jsonObject.getString(FULL_MESSAGE_TOPIC));
-		if (jsonObject.has(USERNAME)) {
-			config.setUsername(jsonObject.getString(USERNAME));
-		}
-		if (jsonObject.has(PASSWORD)) {
-			config.setPassword(jsonObject.getString(PASSWORD));
+		
+		if (jsonObject.has(USERNAME) && jsonObject.has(PASSWORD)) {
+			MqttCredentials credentials = config.initMqttCredentials();
+			credentials.setUsername(jsonObject.getString(USERNAME));
+			credentials.setPassword(jsonObject.getString(PASSWORD));
 		}
 
 		return config;

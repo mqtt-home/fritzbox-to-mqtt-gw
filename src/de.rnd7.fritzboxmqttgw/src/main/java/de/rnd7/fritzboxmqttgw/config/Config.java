@@ -1,18 +1,41 @@
 package de.rnd7.fritzboxmqttgw.config;
 
 import java.time.Duration;
+import java.util.Optional;
 
 public class Config {
 	private String mqttBroker;
-	private String mqttUsername = "";
-	private String mqttPassword = "";
 
 	private Duration pollingInterval;
 	private String fullMessageTopic;
 	private String fritzboxHost;
 	private String fritzboxUsername;
 	private String fritzboxPassword;
+	
+	private Optional<MqttCredentials> mqttCredentials = Optional.empty();
+	
+	public static class MqttCredentials {
+		private String username = "";
+		private String password = "";
+		
+		public void setUsername(String username) {
+			this.username = username;
+		}
+		
+		public String getUsername() {
+			return username;
+		}
+		
+		public void setPassword(String password) {
+			this.password = password;
+		}
+		
+		public String getPassword() {
+			return password;
+		}
 
+	}
+	
 	public void setMqttBroker(final String mqttBroker) {
 		this.mqttBroker = mqttBroker;
 	}
@@ -21,22 +44,16 @@ public class Config {
 		return this.mqttBroker;
 	}
 
-	public void setUsername(final String username) {
-		this.mqttUsername = username;
+	public Optional<MqttCredentials> getMqttCredentials() {
+		return mqttCredentials;
 	}
-
-	public String getUsername() {
-		return this.mqttUsername;
+	
+	public MqttCredentials initMqttCredentials() {
+		MqttCredentials result = new MqttCredentials();
+		mqttCredentials = Optional.of(result); 
+		return result;
 	}
-
-	public void setPassword(final String password) {
-		this.mqttPassword = password;
-	}
-
-	public String getPassword() {
-		return this.mqttPassword;
-	}
-
+	
 	public void setPollingInterval(final Duration pollingInterval) {
 		this.pollingInterval = pollingInterval;
 	}
