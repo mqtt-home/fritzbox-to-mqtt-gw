@@ -2,6 +2,7 @@ package de.rnd7.fritzboxmqttgw.mqtt;
 
 import java.util.Optional;
 
+import de.rnd7.fritzboxmqttgw.config.ConfigMqtt;
 import org.eclipse.paho.client.mqttv3.MqttClient;
 import org.eclipse.paho.client.mqttv3.MqttConnectOptions;
 import org.eclipse.paho.client.mqttv3.MqttException;
@@ -16,17 +17,17 @@ import de.rnd7.fritzboxmqttgw.config.Config;
 
 public class GwMqttClient {
 	private static final int QOS = 2;
-	private static final String CLIENTID = "fritzbox-mqtt-gw";
+	private static final String CLIENT_ID = "fritzbox-mqtt-gw";
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(GwMqttClient.class);
 
 	private final MemoryPersistence persistence = new MemoryPersistence();
 	private final Object mutex = new Object();
-	private final Config config;
+	private final ConfigMqtt config;
 
 	private Optional<MqttClient> client;
 
-	public GwMqttClient(final Config config) {
+	public GwMqttClient(final ConfigMqtt config) {
 		this.config = config;
 		this.client = this.connect();
 	}
@@ -34,14 +35,14 @@ public class GwMqttClient {
 	private Optional<MqttClient> connect() {
 		try {
 			LOGGER.info("Connecting MQTT client");
-			final MqttClient result = new MqttClient(this.config.getMqttBroker(), CLIENTID, this.persistence);
+			final MqttClient result = new MqttClient(this.config.getUrl(),
+					this.config.getClientId().orElse(CLIENT_ID),
+					this.persistence);
+
 			final MqttConnectOptions connOpts = new MqttConnectOptions();
 			connOpts.setCleanSession(true);
-
-			this.config.getMqttCredentials().ifPresent(credentials -> {
-				connOpts.setUserName(credentials.getUsername());
-				connOpts.setPassword(credentials.getPassword().toCharArray());
-			});
+			config.getUsername().ifPresent(connOpts::setUserName);
+			config.getPassword().map(String::toCharArray).ifPresent(connOpts::setPassword);
 
 			result.connect(connOpts);
 

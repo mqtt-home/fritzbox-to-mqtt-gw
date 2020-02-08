@@ -3,6 +3,29 @@
 Convert the FritzBox connection data 
 for `dsl` to mqtt messages.
 
+## Example configuration
+
+```json
+{
+	"mqtt": {
+		"url": "tcp://192.168.2.2:1883",
+		"client-id": "fritzbox-mqtt-gw",
+		"username": "mqtt-username",
+		"password": "mqtt-password",
+		"retain": true,
+
+		"message-interval": 60,
+		"full-message-topic": "internet/connection"
+	},
+
+	"fritzbox": {
+		"host": "192.168.2.1",
+		"username": "fritzbox-username",
+		"password": "fritzbox-password"
+	}
+}
+```
+
 # build
 
 build the docker container using `build.sh`

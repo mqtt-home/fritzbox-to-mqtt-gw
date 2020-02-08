@@ -16,3 +16,7 @@ config.json
 .recommenders
 .sonarlint
 .settings
+*.iml
+
+config.json
+.idea

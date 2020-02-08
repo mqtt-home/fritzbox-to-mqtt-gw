@@ -6,6 +6,8 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
+import de.rnd7.fritzboxmqttgw.config.ConfigFritzbox;
+import de.rnd7.fritzboxmqttgw.config.ConfigMqtt;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -27,12 +29,14 @@ public class Main {
 
 	@SuppressWarnings("squid:S2189")
 	public Main(final Config config) {
+		ConfigMqtt configMqtt = config.getMqtt();
+
 		this.config = config;
-		this.eventBus.register(new GwMqttClient(config));
+		this.eventBus.register(new GwMqttClient(configMqtt));
 
 		try {
 			final ScheduledExecutorService executor = Executors.newScheduledThreadPool(1);
-			executor.scheduleAtFixedRate(this::exec, 0, config.getPollingInterval().getSeconds(), TimeUnit.SECONDS);
+			executor.scheduleAtFixedRate(this::exec, 0, configMqtt.getPollingInterval().getSeconds(), TimeUnit.SECONDS);
 
 			while (true) {
 				this.sleep();
@@ -44,9 +48,11 @@ public class Main {
 
 	private void exec() {
 		try {
-			final Fritzbox fritzbox = new Fritzbox(this.config.getFritzboxHost(),
-					this.config.getFritzboxUsername(), 
-					this.config.getFritzboxPassword());
+			ConfigFritzbox configFritzbox = config.getFritzbox();
+
+			final Fritzbox fritzbox = new Fritzbox(configFritzbox.getHost(),
+					configFritzbox.getUsername(),
+					configFritzbox.getPassword());
 			this.eventBus.post(new Message("dsl", fritzbox.downloadInfo()));
 		} catch (final IOException e) {
 			LOGGER.error(e.getMessage(), e);
