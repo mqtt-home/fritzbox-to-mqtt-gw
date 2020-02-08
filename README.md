@@ -26,6 +26,33 @@ for `dsl` to mqtt messages.
 }
 ```
 
+## Example message
+
+```json
+{
+  "NewTotalBytesSent": 2950666126,
+  "NewDownstreamMaxRate": 280133,
+  "NewATMCRCErrors": 0,
+  "NewUpstreamMaxRate": 50012,
+  "NewDownstreamCurrRate": 270157,
+  "NewConnectionStatus": 1,
+  "NewUptime": 5123,
+  "NewUpstreamCurrRate": 48321,
+  "NewAAL5CRCErrors": 0,
+  "NewATMTransmittedBlocks": 1254889514,
+  "NewExternalIPAddress": "XXX.XXX.XXX.XXX",
+  "NewLayer1DownstreamMaxBitRate": 259117000,
+  "NewBytesReceived": 0,
+  "NewATMReceivedBlocks": 987654249,
+  "NewBytesSent": 0,
+  "NewLayer1UpstreamMaxBitRate": 50072000,
+  "NewPhysicalLinkStatus": 1,
+  "NewPacketsReceived": 0,
+  "NewPacketsSent": 0,
+  "NewTotalBytesReceived": 12345460744
+}
+```
+
 # build
 
 build the docker container using `build.sh`
