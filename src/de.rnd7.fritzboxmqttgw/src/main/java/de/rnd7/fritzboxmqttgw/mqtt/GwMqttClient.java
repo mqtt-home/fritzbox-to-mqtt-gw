@@ -63,6 +63,7 @@ public class GwMqttClient {
 				try {
 					final MqttMessage message = new MqttMessage(value.getBytes());
 					message.setQos(QOS);
+					message.setRetained(config.isRetain());
 					mqttClient.publish(topic, message);
 				} catch (final MqttException e) {
 					LOGGER.error(e.getMessage(), e);
