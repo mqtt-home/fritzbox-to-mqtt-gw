@@ -7,6 +7,5 @@ LABEL description="fritzbox to mqtt gateway"
 RUN mkdir /opt/app
 WORKDIR /opt/app
 COPY src/de.rnd7.fritzboxmqttgw/target/fritzbox-to-mqtt-gw.jar .
-COPY logback.xml .
 
 CMD java -jar ./fritzbox-to-mqtt-gw.jar /var/lib/fritzbox-to-mqtt-gw/config.json
