@@ -1,5 +1,7 @@
 # fritzbox-to-mqtt-gw
 
+[![mqtt-smarthome](https://img.shields.io/badge/mqtt-smarthome-blue.svg)](https://github.com/mqtt-smarthome/mqtt-smarthome)
+
 Convert the FritzBox connection data for `dsl` to mqtt messages.
 
 ## Example configuration
