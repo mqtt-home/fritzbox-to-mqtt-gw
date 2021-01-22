@@ -17,6 +17,6 @@ config.json
 .sonarlint
 .settings
 *.iml
-
+logs/
 config.json
 .idea
