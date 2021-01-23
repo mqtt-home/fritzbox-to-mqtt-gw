@@ -6,6 +6,8 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    env:
+      RELEASE_VERSION: 2.0.1-b${{ github.run_number }}
 
     steps:
       - name: Checkout
@@ -15,6 +17,12 @@ jobs:
         uses: actions/setup-java@v1
         with:
           java-version: 8
+
+      - name: Update version to ${{env.RELEASE_VERSION}}
+        env:
+          USENAME: ${{github.actor}}
+          PASSWORD: ${{ secrets.GITHUB_TOKEN }}
+        run: mvn versions:set -DgenerateBackupPoms=false -DnewVersion=$RELEASE_VERSION --file src/pom.xml --settings .github/workflows/settings.xml
 
       - name: Build with Maven
         env:
@@ -44,7 +52,7 @@ jobs:
           push: true
           tags: |
             pharndt/fritzboxmqtt:latest
-            pharndt/fritzboxmqtt:2.0.0-b${{ github.run_number }}
+            pharndt/fritzboxmqtt:${{env.RELEASE_VERSION}}
 
       - name: Create Release
         id: create_release
@@ -52,11 +60,11 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          tag_name: '2.0.0-b${{ github.run_number }}'
-          release_name: Release 2.0.0-b${{ github.run_number }}
+          tag_name: ${{env.RELEASE_VERSION}}
+          release_name: ${{env.RELEASE_VERSION}}
           body: |
             Docker tag:
-              pharndt/fritzboxmqtt:2.0.0-b${{ github.run_number }}
+              pharndt/fritzboxmqtt:${{env.RELEASE_VERSION}}
 
             Changes in this Release
               - ...
