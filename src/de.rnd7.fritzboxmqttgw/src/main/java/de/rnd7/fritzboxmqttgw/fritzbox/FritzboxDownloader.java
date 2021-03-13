@@ -34,7 +34,7 @@ class FritzboxDownloader {
             connection.init(null);
 
             final JSONObject result = new JSONObject();
-    
+
             switch (type) {
                 case dsl: {
                     wanDSLIfConfig(connection, result);

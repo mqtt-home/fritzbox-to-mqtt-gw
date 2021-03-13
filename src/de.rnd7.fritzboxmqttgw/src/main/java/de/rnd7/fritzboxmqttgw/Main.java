@@ -42,6 +42,7 @@ public class Main {
 
         try {
             final Config config = ConfigParser.parse(new File(args[0]), Config.class);
+
             if (EnumSet.of(BoxType.dsl, BoxType.cable).contains(config.getFritzbox().getBoxType())) {
                 new Main(config);
             }

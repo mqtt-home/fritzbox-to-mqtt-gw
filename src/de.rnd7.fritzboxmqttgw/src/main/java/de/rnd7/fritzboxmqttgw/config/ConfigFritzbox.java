@@ -9,8 +9,9 @@ public class ConfigFritzbox {
     private String host;
     private String username;
     private String password;
-    private BoxType type = BoxType.dsl;
 
+    @SerializedName("box-type")
+    private BoxType boxType = BoxType.dsl;
 
     @SerializedName("polling-interval")
     private Duration pollingInterval = Duration.ofSeconds(60);
@@ -32,6 +33,6 @@ public class ConfigFritzbox {
     }
 
     public BoxType getBoxType() {
-        return type;
+        return boxType;
     }
 }
