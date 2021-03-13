@@ -1,9 +1,9 @@
 version: '2'
 
 services:
-  fritzboxmqtt:
-    hostname: fritzboxmqtt
-    image: pharndt/fritzboxmqtt
-    volumes:
-     - ./config:/var/lib/fritzbox-to-mqtt-gw:ro
-    restart: always 
+    fritzboxmqtt:
+        hostname: fritzboxmqtt
+        image: pharndt/fritzboxmqtt
+        volumes:
+            - ./config:/var/lib/fritzbox-to-mqtt-gw:ro
+        restart: always
