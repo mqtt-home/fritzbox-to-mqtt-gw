@@ -1,2 +1,2 @@
 #!/bin/bash
-docker build -t ulrichfrank/fritzboxmqtt .
+docker build -t pharndt/fritzboxmqtt .
