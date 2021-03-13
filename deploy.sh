@@ -1,2 +1,2 @@
 #!/bin/bash
-docker push ulrichfrank/fritzboxmqtt:latest
+docker push pharndt/fritzboxmqtt:latest
