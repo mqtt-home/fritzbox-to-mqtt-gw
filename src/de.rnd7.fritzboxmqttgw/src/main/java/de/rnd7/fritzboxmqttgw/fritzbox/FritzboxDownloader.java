@@ -4,6 +4,8 @@ import de.bausdorf.avm.tr064.Action;
 import de.bausdorf.avm.tr064.FritzConnection;
 import de.bausdorf.avm.tr064.Response;
 import de.bausdorf.avm.tr064.Service;
+import de.rnd7.fritzboxmqttgw.config.BoxType;
+
 import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -16,11 +18,13 @@ class FritzboxDownloader {
     private final String host;
     private final String username;
     private final String password;
+    private final BoxType type;
 
-    FritzboxDownloader(final String host, final String username, final String password) {
+    FritzboxDownloader(final String host, final String username, final String password, final BoxType type) {
         this.host = host;
         this.username = username;
         this.password = password;
+        this.type = type;
     }
 
     public JSONObject downloadInfo() throws IOException {
@@ -30,7 +34,21 @@ class FritzboxDownloader {
             connection.init(null);
 
             final JSONObject result = new JSONObject();
-            wanIpConfig(connection, result);
+    
+            switch (type) {
+                case dsl: {
+                    wanDSLIfConfig(connection, result);
+                    linkConfig(connection, result);
+                    break;
+                }
+                case cable: {
+                    wanIpConfig(connection, result);
+                    break;
+                }
+                default:
+                    throw new UnsupportedOperationException("BoxType <" + type + "> not supported");
+            }
+
             ethernetInterfaceConfig(connection, result);
             wanInterfaceConfig(connection, result);
 
@@ -38,6 +56,23 @@ class FritzboxDownloader {
         } catch (Exception e) {
             throw new IOException(e);
         }
+    }
+
+    private void wanDSLIfConfig(final FritzConnection connection, final JSONObject result) throws IOException, NoSuchFieldException {
+        final Response response = get(connection, "WANDSLInterfaceConfig:1", "GetInfo");
+
+        result.put("NewDownstreamMaxRate", response.getValueAsLong("NewDownstreamMaxRate"));
+        result.put("NewUpstreamMaxRate", response.getValueAsLong("NewUpstreamMaxRate"));
+        result.put("NewDownstreamCurrRate", response.getValueAsLong("NewDownstreamCurrRate"));
+        result.put("NewUpstreamCurrRate", response.getValueAsLong("NewUpstreamCurrRate"));
+    }
+
+    private void linkConfig(final FritzConnection connection, final JSONObject result) throws IOException, NoSuchFieldException {
+        final Response response = get(connection, "WANDSLLinkConfig:1", "GetStatistics");
+        result.put("NewATMCRCErrors", response.getValueAsLong("NewATMCRCErrors"));
+        result.put("NewATMTransmittedBlocks", response.getValueAsLong("NewATMTransmittedBlocks"));
+        result.put("NewATMReceivedBlocks", response.getValueAsLong("NewATMReceivedBlocks"));
+        result.put("NewAAL5CRCErrors", response.getValueAsLong("NewAAL5CRCErrors"));
     }
 
     private void wanIpConfig(final FritzConnection connection, final JSONObject result) throws IOException, NoSuchFieldException {
@@ -80,6 +115,13 @@ class FritzboxDownloader {
 
         response = get(connection, "WANCommonInterfaceConfig:1", "GetTotalBytesReceived");
         result.put("NewTotalBytesReceived", response.getValueAsLong("NewTotalBytesReceived"));
+
+        if (type == BoxType.dsl) {
+            response = get(connection, "WANPPPConnection:1", "GetInfo");
+            result.put("NewConnectionStatus", response.getValueAsString("NewConnectionStatus").equalsIgnoreCase("connected") ? 1 : 0);
+            result.put("NewUptime", response.getValueAsLong("NewUptime"));
+            result.put("NewExternalIPAddress", response.getValueAsString("NewExternalIPAddress"));
+        }
     }
 
     private Response get(final FritzConnection connection, final String serviceName, final String actionName) throws IOException {
