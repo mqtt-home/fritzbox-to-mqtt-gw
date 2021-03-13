@@ -36,7 +36,7 @@ public class FritzboxService {
                     config.getPassword());
 
             final String message = downloader.downloadInfo().toString();
-            Events.post(PublishMessage.relative("dsl",
+            Events.post(PublishMessage.relative("wanip",
                     message));
         } catch (final IOException e) {
             LOGGER.error(e.getMessage(), e);

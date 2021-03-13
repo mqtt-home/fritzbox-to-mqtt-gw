@@ -31,7 +31,6 @@ class FritzboxDownloader {
 
             final JSONObject result = new JSONObject();
             wanIpConfig(connection, result);
-            linkConfig(connection, result);
             ethernetInterfaceConfig(connection, result);
             wanInterfaceConfig(connection, result);
 
@@ -40,25 +39,16 @@ class FritzboxDownloader {
             throw new IOException(e);
         }
     }
-/*
-    private void wanDSLIfConfig(final FritzConnection connection, final JSONObject result) throws IOException, NoSuchFieldException {
-        final Response response = get(connection, "WANDSLInterfaceConfig:1", "GetInfo");
 
-        result.put("NewDownstreamMaxRate", response.getValueAsLong("NewDownstreamMaxRate"));
-        result.put("NewUpstreamMaxRate", response.getValueAsLong("NewUpstreamMaxRate"));
-        result.put("NewDownstreamCurrRate", response.getValueAsLong("NewDownstreamCurrRate"));
-        result.put("NewUpstreamCurrRate", response.getValueAsLong("NewUpstreamCurrRate"));
-    }
-*/
     private void wanIpConfig(final FritzConnection connection, final JSONObject result) throws IOException, NoSuchFieldException {
-        final Response response = get(connection, "WANIPConnection1:1", "GetInfo");
+        final Response response = get(connection, "WANIPConnection:1", "GetInfo");
 
         result.put("NewEnable", response.getValueAsBoolean("NewEnable"));
         result.put("NewConnectionStatus", response.getValueAsString("NewConnectionStatus"));
         result.put("NewPossibleConnectionTypes", response.getValueAsString("NewPossibleConnectionTypes"));
         result.put("NewConnectionType", response.getValueAsString("NewConnectionType"));
         result.put("NewName", response.getValueAsString("NewName"));
-        result.put("NewUptime", response.getValueAsString("NewUptime"));
+        result.put("NewUptime", response.getValueAsLong("NewUptime"));
         result.put("NewLastConnectionError", response.getValueAsString("NewLastConnectionError"));
         result.put("NewRSIPAvailable", response.getValueAsBoolean("NewRSIPAvailable"));
         result.put("NewNATEnabled", response.getValueAsBoolean("NewNATEnabled"));
@@ -69,14 +59,6 @@ class FritzboxDownloader {
         result.put("NewRouteProtocolRx", response.getValueAsString("NewRouteProtocolRx"));
         result.put("NewDNSEnabled", response.getValueAsBoolean("NewDNSEnabled"));
         result.put("NewDNSOverrideAllowed", response.getValueAsBoolean("NewDNSOverrideAllowed"));
-    }
-
-    private void linkConfig(final FritzConnection connection, final JSONObject result) throws IOException, NoSuchFieldException {
-        final Response response = get(connection, "WANDSLLinkConfig:1", "GetStatistics");
-        result.put("NewATMCRCErrors", response.getValueAsLong("NewATMCRCErrors"));
-        result.put("NewATMTransmittedBlocks", response.getValueAsLong("NewATMTransmittedBlocks"));
-        result.put("NewATMReceivedBlocks", response.getValueAsLong("NewATMReceivedBlocks"));
-        result.put("NewAAL5CRCErrors", response.getValueAsLong("NewAAL5CRCErrors"));
     }
 
     private void ethernetInterfaceConfig(final FritzConnection connection, final JSONObject result) throws IOException, NoSuchFieldException {
@@ -98,12 +80,6 @@ class FritzboxDownloader {
 
         response = get(connection, "WANCommonInterfaceConfig:1", "GetTotalBytesReceived");
         result.put("NewTotalBytesReceived", response.getValueAsLong("NewTotalBytesReceived"));
-
-        response = get(connection, "WANPPPConnection:1", "GetInfo");
-        result.put("NewConnectionStatus", response.getValueAsString("NewConnectionStatus").equalsIgnoreCase("connected") ? 1 : 0);
-        result.put("NewUptime", response.getValueAsLong("NewUptime"));
-        result.put("NewExternalIPAddress", response.getValueAsString("NewExternalIPAddress"));
-
     }
 
     private Response get(final FritzConnection connection, final String serviceName, final String actionName) throws IOException {
@@ -112,5 +88,4 @@ class FritzboxDownloader {
         final Action action = service.getAction(actionName);
         return action.execute();
     }
-
 }
