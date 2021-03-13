@@ -5,9 +5,12 @@ import com.google.gson.annotations.SerializedName;
 import java.time.Duration;
 
 public class ConfigFritzbox {
+
     private String host;
     private String username;
     private String password;
+    private BoxType type = BoxType.dsl;
+
 
     @SerializedName("polling-interval")
     private Duration pollingInterval = Duration.ofSeconds(60);
@@ -26,5 +29,9 @@ public class ConfigFritzbox {
 
     public Duration getPollingInterval() {
         return pollingInterval;
+    }
+
+    public BoxType getBoxType() {
+        return type;
     }
 }
