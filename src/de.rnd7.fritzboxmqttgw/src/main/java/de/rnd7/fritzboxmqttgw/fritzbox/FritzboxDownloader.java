@@ -30,7 +30,7 @@ class FritzboxDownloader {
             connection.init(null);
 
             final JSONObject result = new JSONObject();
-            wanDSLIfConfig(connection, result);
+            wanIpConfig(connection, result);
             linkConfig(connection, result);
             ethernetInterfaceConfig(connection, result);
             wanInterfaceConfig(connection, result);
@@ -40,7 +40,7 @@ class FritzboxDownloader {
             throw new IOException(e);
         }
     }
-
+/*
     private void wanDSLIfConfig(final FritzConnection connection, final JSONObject result) throws IOException, NoSuchFieldException {
         final Response response = get(connection, "WANDSLInterfaceConfig:1", "GetInfo");
 
@@ -49,7 +49,27 @@ class FritzboxDownloader {
         result.put("NewDownstreamCurrRate", response.getValueAsLong("NewDownstreamCurrRate"));
         result.put("NewUpstreamCurrRate", response.getValueAsLong("NewUpstreamCurrRate"));
     }
+*/
+    private void wanIpConfig(final FritzConnection connection, final JSONObject result) throws IOException, NoSuchFieldException {
+        final Response response = get(connection, "WANIPConnection1:1", "GetInfo");
 
+        result.put("NewEnable", response.getValueAsBoolean("NewEnable"));
+        result.put("NewConnectionStatus", response.getValueAsString("NewConnectionStatus"));
+        result.put("NewPossibleConnectionTypes", response.getValueAsString("NewPossibleConnectionTypes"));
+        result.put("NewConnectionType", response.getValueAsString("NewConnectionType"));
+        result.put("NewName", response.getValueAsString("NewName"));
+        result.put("NewUptime", response.getValueAsString("NewUptime"));
+        result.put("NewLastConnectionError", response.getValueAsString("NewLastConnectionError"));
+        result.put("NewRSIPAvailable", response.getValueAsBoolean("NewRSIPAvailable"));
+        result.put("NewNATEnabled", response.getValueAsBoolean("NewNATEnabled"));
+        result.put("NewExternalIPAddress", response.getValueAsString("NewExternalIPAddress"));
+        result.put("NewDNSServers", response.getValueAsString("NewDNSServers"));
+        result.put("NewMACAddress", response.getValueAsString("NewMACAddress"));
+        result.put("NewConnectionTrigger", response.getValueAsString("NewConnectionTrigger"));
+        result.put("NewRouteProtocolRx", response.getValueAsString("NewRouteProtocolRx"));
+        result.put("NewDNSEnabled", response.getValueAsBoolean("NewDNSEnabled"));
+        result.put("NewDNSOverrideAllowed", response.getValueAsBoolean("NewDNSOverrideAllowed"));
+    }
 
     private void linkConfig(final FritzConnection connection, final JSONObject result) throws IOException, NoSuchFieldException {
         final Response response = get(connection, "WANDSLLinkConfig:1", "GetStatistics");
