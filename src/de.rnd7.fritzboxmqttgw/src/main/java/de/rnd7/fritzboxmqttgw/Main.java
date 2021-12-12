@@ -20,14 +20,15 @@ public class Main {
     @SuppressWarnings("squid:S2189")
     public Main(final Config config) {
         this.config = config;
+        try {
+            GwMqttClient.start(config.getMqtt()
+                .setDefaultTopic("fritzbox")
+            ).online();
 
-        final GwMqttClient client = GwMqttClient.start(config.getMqtt()
-                .setDefaultClientId("fritzbox-mqtt-gw")
-                .setDefaultTopic("fritzbox"));
-
-        client.online();
-
-        new FritzboxService(config.getFritzbox()).start();
+            new FritzboxService(config.getFritzbox()).start();
+        } catch (final Exception e) {
+            LOGGER.error(e.getMessage(), e);
+        }
     }
 
     public static void main(final String[] args) {
