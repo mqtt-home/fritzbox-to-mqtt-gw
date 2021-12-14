@@ -1,0 +1,16 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="Main" type="Application" factoryName="Application" nameIsGenerated="true">
+    <option name="MAIN_CLASS_NAME" value="de.rnd7.fritzboxmqttgw.Main" />
+    <module name="de.rnd7.fritzboxmqttgw" />
+    <option name="PROGRAM_PARAMETERS" value="config.json" />
+    <extension name="coverage">
+      <pattern>
+        <option name="PATTERN" value="de.rnd7.fritzboxmqttgw.*" />
+        <option name="ENABLED" value="true" />
+      </pattern>
+    </extension>
+    <method v="2">
+      <option name="Make" enabled="true" />
+    </method>
+  </configuration>
+</component>

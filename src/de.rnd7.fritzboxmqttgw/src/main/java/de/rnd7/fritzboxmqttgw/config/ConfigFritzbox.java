@@ -5,12 +5,19 @@ import com.google.gson.annotations.SerializedName;
 import java.time.Duration;
 
 public class ConfigFritzbox {
+
     private String host;
     private String username;
     private String password;
 
+    @SerializedName("box-type")
+    private BoxType boxType = BoxType.dsl;
+
     @SerializedName("polling-interval")
     private Duration pollingInterval = Duration.ofSeconds(60);
+
+    @SerializedName("enum-as-long")
+    private boolean enumAsLong = false;
 
     public String getHost() {
         return host;
@@ -26,5 +33,13 @@ public class ConfigFritzbox {
 
     public Duration getPollingInterval() {
         return pollingInterval;
+    }
+
+    public BoxType getBoxType() {
+        return boxType;
+    }
+
+    public boolean isEnumAsLong() {
+        return enumAsLong;
     }
 }
