@@ -34,7 +34,8 @@ public class FritzboxService {
             final FritzboxDownloader downloader = new FritzboxDownloader(config.getHost(),
                     config.getUsername(),
                     config.getPassword(),
-                    config.getBoxType());
+                    config.getBoxType(),
+                    config.isEnumAsLong());
 
             final String message = downloader.downloadInfo().toString();
             Events.post(PublishMessage.relative(config.getBoxType().toString(),

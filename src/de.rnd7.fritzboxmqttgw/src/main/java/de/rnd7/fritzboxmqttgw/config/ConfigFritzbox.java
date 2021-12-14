@@ -16,6 +16,9 @@ public class ConfigFritzbox {
     @SerializedName("polling-interval")
     private Duration pollingInterval = Duration.ofSeconds(60);
 
+    @SerializedName("enum-as-long")
+    private boolean enumAsLong = false;
+
     public String getHost() {
         return host;
     }
@@ -34,5 +37,9 @@ public class ConfigFritzbox {
 
     public BoxType getBoxType() {
         return boxType;
+    }
+
+    public boolean isEnumAsLong() {
+        return enumAsLong;
     }
 }

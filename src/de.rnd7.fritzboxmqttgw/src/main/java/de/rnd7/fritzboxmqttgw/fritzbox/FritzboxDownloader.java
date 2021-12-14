@@ -11,6 +11,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
+import java.util.function.Function;
 import java.util.stream.Stream;
 
 class FritzboxDownloader {
@@ -20,12 +21,14 @@ class FritzboxDownloader {
     private final String username;
     private final String password;
     private final BoxType type;
+    private final boolean enumAsLong;
 
-    FritzboxDownloader(final String host, final String username, final String password, final BoxType type) {
+    FritzboxDownloader(final String host, final String username, final String password, final BoxType type, boolean enumAsLong) {
         this.host = host;
         this.username = username;
         this.password = password;
         this.type = type;
+        this.enumAsLong = enumAsLong;
     }
 
     public JSONObject downloadInfo() throws IOException {
@@ -100,8 +103,15 @@ class FritzboxDownloader {
         Stream.of("NewLayer1DownstreamMaxBitRate", "NewLayer1UpstreamMaxBitRate")
             .forEach(key -> putLong(key, response1, result));
 
-        Stream.of("NewPhysicalLinkStatus")
-            .forEach(key -> putString(key, response1, result));
+        if (enumAsLong) {
+            Stream.of("NewPhysicalLinkStatus")
+                .forEach(key -> putStringAsLong(key, response1, x -> x.equalsIgnoreCase("up") ? 1 : 0L, result));
+        }
+        else {
+            Stream.of("NewPhysicalLinkStatus")
+                .forEach(key -> putString(key, response1, result));
+
+        }
 
         final Response response2 = get(connection, "WANCommonInterfaceConfig:1", "GetTotalBytesSent");
         Stream.of("NewTotalBytesSent")
@@ -115,7 +125,15 @@ class FritzboxDownloader {
             final Response response4 = get(connection, "WANPPPConnection:1", "GetInfo");
             Stream.of("NewUptime")
                 .forEach(key -> putLong(key, response4, result));
-            Stream.of("NewConnectionStatus", "NewExternalIPAddress")
+            if (enumAsLong) {
+                Stream.of("NewConnectionStatus")
+                    .forEach(key -> putStringAsLong(key, response4, x -> x.equalsIgnoreCase("connected") ? 1 : 0L, result));
+            }
+            else {
+                Stream.of("NewConnectionStatus")
+                    .forEach(key -> putString(key, response4, result));
+            }
+            Stream.of("NewExternalIPAddress")
                 .forEach(key -> putString(key, response4, result));
         }
     }
@@ -123,6 +141,14 @@ class FritzboxDownloader {
     private void putString(final String key, final Response source, final JSONObject target) {
         try {
             target.put(key, source.getValueAsString(key));
+        } catch (NoSuchFieldException e) {
+            notFound(key, e);
+        }
+    }
+
+    private void putStringAsLong(final String key, final Response source, Function<String, Long> mapper, final JSONObject target) {
+        try {
+            target.put(key, mapper.apply(source.getValueAsString(key)));
         } catch (NoSuchFieldException e) {
             notFound(key, e);
         }
