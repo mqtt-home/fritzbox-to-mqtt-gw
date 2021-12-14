@@ -120,7 +120,7 @@ class FritzboxDownloader {
         }
     }
 
-    private void putString(String key, Response source, final JSONObject target) {
+    private void putString(final String key, final Response source, final JSONObject target) {
         try {
             target.put(key, source.getValueAsString(key));
         } catch (NoSuchFieldException e) {
@@ -128,7 +128,7 @@ class FritzboxDownloader {
         }
     }
 
-    private void putLong(String key, Response source, final JSONObject target) {
+    private void putLong(final String key, final Response source, final JSONObject target) {
         try {
             target.put(key, source.getValueAsLong(key));
         } catch (NoSuchFieldException e) {
@@ -136,7 +136,7 @@ class FritzboxDownloader {
         }
     }
 
-    private void putBool(String key, Response source, final JSONObject target) {
+    private void putBool(final String key, final Response source, final JSONObject target) {
         try {
             target.put(key, source.getValueAsBoolean(key));
         } catch (NoSuchFieldException e) {

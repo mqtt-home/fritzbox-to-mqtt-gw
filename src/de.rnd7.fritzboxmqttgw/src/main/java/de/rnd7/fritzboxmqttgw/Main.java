@@ -46,7 +46,7 @@ public class Main {
         }
     }
 
-    private static Config validate(Config config) {
+    private static Config validate(final Config config) {
         if (!EnumSet.of(BoxType.dsl, BoxType.cable).contains(config.getFritzbox().getBoxType())) {
             throw new IllegalStateException(String.format("BoxType <%s> not supported", config.getFritzbox().getBoxType()));
         }
