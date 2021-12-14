@@ -23,7 +23,7 @@ class FritzboxDownloader {
     private final BoxType type;
     private final boolean enumAsLong;
 
-    FritzboxDownloader(final String host, final String username, final String password, final BoxType type, boolean enumAsLong) {
+    FritzboxDownloader(final String host, final String username, final String password, final BoxType type, final boolean enumAsLong) {
         this.host = host;
         this.username = username;
         this.password = password;
@@ -146,7 +146,7 @@ class FritzboxDownloader {
         }
     }
 
-    private void putStringAsLong(final String key, final Response source, Function<String, Long> mapper, final JSONObject target) {
+    private void putStringAsLong(final String key, final Response source, final Function<String, Long> mapper, final JSONObject target) {
         try {
             target.put(key, mapper.apply(source.getValueAsString(key)));
         } catch (NoSuchFieldException e) {
