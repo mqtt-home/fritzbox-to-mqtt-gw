@@ -20,6 +20,12 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
 
+      - uses: philipparndt/get-release-number@v1
+        id: next
+        with:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          releaseType: ${{ github.event.inputs.releaseType }}
+
       - name: Set up JDK 8
         uses: actions/setup-java@v2
         with:
