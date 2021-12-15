@@ -3,16 +3,18 @@ name: Build release
 on:
   workflow_dispatch:
     inputs:
-      releaseVersion:
-        description: 'Version'
+      releaseType:
+        description: Release type
         required: true
-        default: '3.0.0'
+        type: choice
+        options:
+          - patch
+          - minor
+          - major
 
 jobs:
   build:
     runs-on: ubuntu-latest
-    env:
-      RELEASE_VERSION: ${{ github.event.inputs.releaseVersion }}-b${{ github.run_number }}
 
     steps:
       - name: Checkout
@@ -24,10 +26,11 @@ jobs:
           distribution: 'zulu'
           java-version: 8
 
-      - name: Update version to ${{env.RELEASE_VERSION}}
+      - name: Update version to ${{ steps.next.outputs.version }}
         env:
           USENAME: ${{github.actor}}
           PASSWORD: ${{ secrets.GITHUB_TOKEN }}
+          RELEASE_VERSION: ${{ steps.next.outputs.version }}
         run: mvn versions:set -DgenerateBackupPoms=false -DnewVersion=$RELEASE_VERSION --file src/pom.xml --settings .github/workflows/settings.xml
 
       - name: Build with Maven
@@ -51,6 +54,8 @@ jobs:
       - name: Build docker container and push
         id: docker_build
         uses: docker/build-push-action@v2
+        env:
+          RELEASE_VERSION: ${{ steps.next.outputs.version }}
         with:
           context: .
           file: ./Dockerfile
@@ -65,14 +70,15 @@ jobs:
         uses: actions/create-release@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          RELEASE_VERSION: ${{ steps.next.outputs.version }}
         with:
           tag_name: ${{env.RELEASE_VERSION}}
           release_name: ${{env.RELEASE_VERSION}}
           body: |
-            Docker tag:
-              pharndt/fritzboxmqtt:${{env.RELEASE_VERSION}}
+            Docker tag: `pharndt/fritzboxmqtt:${{env.RELEASE_VERSION}}`
 
             Changes in this Release
+              - Dependency update
               - ...
 
           draft: false
