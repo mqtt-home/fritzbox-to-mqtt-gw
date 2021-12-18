@@ -91,7 +91,7 @@
         <repository>
             <id>github</id>
             <name>GitHub OWNER Apache Maven Packages</name>
-            <url>https://maven.pkg.github.com/philipparndt/mqtt-gateway</url>
+            <url>https://maven.pkg.github.com/mqtt-home/mqtt-gateway</url>
         </repository>
     </repositories>
 
