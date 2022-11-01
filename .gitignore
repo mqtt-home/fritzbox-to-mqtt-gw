@@ -20,3 +20,7 @@ config.json
 logs/
 config.json
 .idea
+
+build_internal/
+node_modules/
+dist/

@@ -2,7 +2,7 @@
 
 [![mqtt-smarthome](https://img.shields.io/badge/mqtt-smarthome-blue.svg)](https://github.com/mqtt-smarthome/mqtt-smarthome)
 
-Convert the FritzBox connection data for `DSL` and `CABLE` to MQTT messages.
+Convert the FritzBox tr-064 data to MQTT messages.
 
 ## Example configuration
 
@@ -14,16 +14,78 @@ Convert the FritzBox connection data for `DSL` and `CABLE` to MQTT messages.
     "username": "mqtt-username",
     "password": "mqtt-password",
     "retain": true,
-
     "topic": "internet/connection"
   },
-
   "fritzbox": {
     "polling-interval": 60,
     "host": "192.168.2.1",
     "username": "fritzbox-username",
-    "password": "fritzbox-password", 
-    "enum-as-long": false
+    "password": "fritzbox-password",
+    "box-type": "dsl",
+    "message": [
+      {
+        "service": "WANDSLLinkConfig:1",
+        "action": "GetStatistics",
+        "values": [
+          { "name": "NewATMCRCErrors" },
+          { "name": "NewATMTransmittedBlocks" },
+          { "name": "NewATMReceivedBlocks" },
+          { "name": "NewAAL5CRCErrors" }
+        ]
+      },
+      {
+        "service": "WANCommonInterfaceConfig:1",
+        "action": "GetTotalBytesSent",
+        "values": [
+          { "name": "NewTotalBytesSent" }
+        ]
+      },
+      {
+        "service": "WANCommonInterfaceConfig:1",
+        "action": "GetTotalBytesReceived",
+        "values": [
+          { "name": "NewTotalBytesReceived" }
+        ]
+      },
+      {
+        "service": "WANPPPConnection:1",
+        "action": "GetInfo",
+        "values": [
+          { "name": "NewConnectionStatus", "mapEnum": { "Connected": 1, "__default": 0 } },
+          { "name": "NewExternalIPAddress" },
+          { "name": "NewUptime" }
+        ]
+      },
+      {
+        "service": "WANDSLInterfaceConfig:1",
+        "action": "GetInfo",
+        "values": [
+          { "name": "NewDownstreamMaxRate" },
+          { "name": "NewUpstreamMaxRate" },
+          { "name": "NewDownstreamCurrRate" },
+          { "name": "NewUpstreamCurrRate" }
+        ]
+      },
+      {
+        "service": "WANCommonInterfaceConfig:1",
+        "action": "GetCommonLinkProperties",
+        "values": [
+          { "name": "NewLayer1DownstreamMaxBitRate" },
+          { "name": "NewLayer1UpstreamMaxBitRate" },
+          { "name": "NewPhysicalLinkStatus", "mapEnum": { "Up": 1, "__default": 0 } }
+        ]
+      },
+      {
+        "service": "LANEthernetInterfaceConfig:1",
+        "action": "GetStatistics",
+        "values": [
+          { "name": "NewBytesReceived" },
+          { "name": "NewBytesSent" },
+          { "name": "NewPacketsReceived" },
+          { "name": "NewPacketsSent" }
+        ]
+      }
+    ]
   }
 }
 ```
@@ -55,10 +117,10 @@ Convert the FritzBox connection data for `DSL` and `CABLE` to MQTT messages.
 }
 ```
 
-# Upgrade from 2.x to 3.x
+# Upgrade to 4.x
 
-The message format is changed for `NewConnectionStatus` and `NewPhysicalLinkStatus`.
-When you like to restore the old behavior, you have to set `"enum-as-long": true` in the configuration.
+The configuration has been changed and the message format is much more flexible now. 
+You can now specify the properties of the message that will be sent.
 
 # build
 
