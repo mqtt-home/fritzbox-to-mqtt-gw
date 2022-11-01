@@ -1,0 +1,10 @@
+version: '2'
+
+services:
+  huemqtt:
+    hostname: huemqtt
+    image: pharndt/fritzboxmqtt:${VERSION}
+    build: .
+    volumes:
+      - ./production/config:/var/lib/fritzbox-to-mqtt-gw:ro
+    restart: "no"
