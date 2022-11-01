@@ -3,6 +3,14 @@ import { Options, query } from "./api/fritzbox"
 import { log } from "./logger"
 import { connectMqtt, publish } from "./mqtt/mqtt-client"
 
+const isNumeric = (str: any) => {
+    return !isNaN(parseFloat(str)) && isFinite(str)
+}
+
+const convertType = (value: any) => {
+    return isNumeric(value) ? +value : value
+}
+
 const fetchFritzBoxData = async (config = getAppConfig().fritzbox) => {
     const options: Options = {
         server: config.host,
@@ -30,7 +38,7 @@ const fetchFritzBoxData = async (config = getAppConfig().fritzbox) => {
                     }
                 }
 
-                result[value.name] = valueData
+                result[value.name] = convertType(valueData)
             }
         }
         catch (e: any) {
