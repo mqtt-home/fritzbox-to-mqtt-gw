@@ -82,7 +82,7 @@ export const connectMqtt: (() => Promise<() => void>) = () => {
                     })
                 }
                 else {
-                    log.error(err)
+                    log.error("MQTT Error", err)
                     reject(err)
                 }
             })

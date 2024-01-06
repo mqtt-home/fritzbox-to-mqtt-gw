@@ -1,4 +1,5 @@
 import * as fs from "fs"
+import { log } from "../logger"
 
 export type ConfigMqtt = {
     url: string,
@@ -56,9 +57,20 @@ export const applyDefaults = (config: any) => {
     } as Config
 }
 
+export const replaceEnvVariables = (input: string) => {
+    const envVariableRegex = /\${([^}]+)}/g
+
+    return input.replace(envVariableRegex, (_, envVarName) => {
+        return process.env[envVarName] || ""
+    })
+}
+
 export const loadConfig = (file: string) => {
     const buffer = fs.readFileSync(file)
-    applyConfig(JSON.parse(buffer.toString()))
+    const effectiveConfig = replaceEnvVariables(buffer.toString())
+    log.trace("Using config", effectiveConfig)
+    log.trace("parsing config")
+    applyConfig(JSON.parse(effectiveConfig))
 }
 
 export const applyConfig = (config: any) => {
