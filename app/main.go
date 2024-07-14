@@ -26,7 +26,7 @@ func PublishJSON(cfg config2.MQTTConfig, data any) {
 func mainLoop(cfg config.Config) {
 	for {
 		dataMap := fritzbox.LoadData(cfg)
-		logger.Info("DataMap: ", fritzbox.JsonFromDataMap(dataMap))
+		logger.Debug("DataMap: ", fritzbox.JsonFromDataMap(dataMap))
 		PublishJSON(cfg.MQTT, dataMap)
 
 		time.Sleep(time.Duration(cfg.Fritzbox.PollingInterval) * time.Second)
