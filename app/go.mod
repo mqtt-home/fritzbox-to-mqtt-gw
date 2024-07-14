@@ -7,7 +7,7 @@ toolchain go1.22.5
 require (
 	github.com/philipparndt/go-logger v1.0.0
 	github.com/philipparndt/mqtt-gateway v1.1.0
-	github.com/sberk42/fritzbox_exporter v0.0.0-20231219060255-6a1199ccb7cc
+	github.com/sberk42/fritzbox_exporter v0.0.0-20240409154313-846e73fa6fac
 )
 
 require (
@@ -27,5 +27,5 @@ require (
 	golang.org/x/sync v0.3.0 // indirect
 	golang.org/x/sys v0.15.0 // indirect
 	golang.org/x/text v0.14.0 // indirect
-	google.golang.org/protobuf v1.31.0 // indirect
+	google.golang.org/protobuf v1.33.0 // indirect
 )
