@@ -15,65 +15,25 @@
         "box-type": "dsl",
         "message": [
             {
-                "service": "WANDSLLinkConfig:1",
-                "action": "GetStatistics",
-                "values": [
-                    { "name": "NewATMCRCErrors" },
-                    { "name": "NewATMTransmittedBlocks" },
-                    { "name": "NewATMReceivedBlocks" },
-                    { "name": "NewAAL5CRCErrors" }
-                ]
-            },
-            {
-                "service": "WANCommonInterfaceConfig:1",
+                "service": "urn:dslforum-org:service:WANCommonInterfaceConfig:1",
                 "action": "GetTotalBytesSent",
                 "values": [
-                    { "name": "NewTotalBytesSent" }
+                    { "name": "TotalBytesSent" }
                 ]
             },
             {
-                "service": "WANCommonInterfaceConfig:1",
+                "service": "urn:dslforum-org:service:WANCommonInterfaceConfig:1",
                 "action": "GetTotalBytesReceived",
                 "values": [
-                    { "name": "NewTotalBytesReceived" }
+                    { "name": "TotalBytesReceived" }
                 ]
             },
             {
-                "service": "WANPPPConnection:1",
+                "service": "urn:dslforum-org:service:WANIPConnection:1",
                 "action": "GetInfo",
                 "values": [
-                    { "name": "NewConnectionStatus", "mapEnum": { "Connected": 1, "__default": 0 } },
-                    { "name": "NewExternalIPAddress" },
-                    { "name": "NewUptime" }
-                ]
-            },
-            {
-                "service": "WANDSLInterfaceConfig:1",
-                "action": "GetInfo",
-                "values": [
-                    { "name": "NewDownstreamMaxRate" },
-                    { "name": "NewUpstreamMaxRate" },
-                    { "name": "NewDownstreamCurrRate" },
-                    { "name": "NewUpstreamCurrRate" }
-                ]
-            },
-            {
-                "service": "WANCommonInterfaceConfig:1",
-                "action": "GetCommonLinkProperties",
-                "values": [
-                    { "name": "NewLayer1DownstreamMaxBitRate" },
-                    { "name": "NewLayer1UpstreamMaxBitRate" },
-                    { "name": "NewPhysicalLinkStatus", "mapEnum": { "Up": 1, "__default": 0 } }
-                ]
-            },
-            {
-                "service": "LANEthernetInterfaceConfig:1",
-                "action": "GetStatistics",
-                "values": [
-                    { "name": "NewBytesReceived" },
-                    { "name": "NewBytesSent" },
-                    { "name": "NewPacketsReceived" },
-                    { "name": "NewPacketsSent" }
+                    { "name": "Uptime" },
+                    { "name": "ConnectionStatus", "mapEnum": { "Connected": 1, "__default": 0 } }
                 ]
             }
         ]
