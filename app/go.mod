@@ -1,12 +1,12 @@
 module github.com/mqtt-home/fritzbox-to-mqtt-gw
 
-go 1.21
+go 1.22
 
 toolchain go1.22.5
 
 require (
 	github.com/philipparndt/go-logger v1.0.0
-	github.com/philipparndt/mqtt-gateway v1.1.0
+	github.com/philipparndt/mqtt-gateway v1.3.0
 	github.com/sberk42/fritzbox_exporter v0.0.0-20240409154313-846e73fa6fac
 )
 

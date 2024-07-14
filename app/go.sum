@@ -18,6 +18,8 @@ github.com/philipparndt/go-logger v1.0.0 h1:5khKl1q8q6FH74S1wF5KPl6DvdZnRdPKqKbB
 github.com/philipparndt/go-logger v1.0.0/go.mod h1:4mWf8eNH82GhKl5byAFwXcux9WPNuaePaPaAFbgjHXg=
 github.com/philipparndt/mqtt-gateway v1.1.0 h1:tiq2o/6Zboz4Gk9iO5plVSCvjSZnwy7TTVA638KMquI=
 github.com/philipparndt/mqtt-gateway v1.1.0/go.mod h1:orCWDqZuyRus3Sp/bHnuw5Bt05GbrNfXMQGO0f5d1Kc=
+github.com/philipparndt/mqtt-gateway v1.3.0 h1:QeJ0XIEnlzH4Qm7vqAQN3WTrI45UcPxlcQFcTrCXvn8=
+github.com/philipparndt/mqtt-gateway v1.3.0/go.mod h1:N6LC57xFs/u41Xc5csPHTACm/00GyOyMgIC+oOqp32Y=
 github.com/pmezard/go-difflib v1.0.0/go.mod h1:iKH77koFhYxTK1pcRnkKkqfTogsbg7gZNVY4sRDYZ/4=
 github.com/prometheus/client_golang v1.17.0 h1:rl2sfwZMtSthVU752MqfjQozy7blglC+1SOtjMAMh+Q=
 github.com/prometheus/client_golang v1.17.0/go.mod h1:VeL+gMmOAxkS2IqfCq0ZmHSL+LjWfWDUmp1mBz9JgUY=
