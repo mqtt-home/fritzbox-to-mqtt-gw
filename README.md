@@ -76,7 +76,7 @@ Convert the FritzBox tr-064 data to MQTT messages.
 
 # Upgrade to 5.x
 
-5.x is a major upgrade (
+5.x is a major upgrade
 - reimplemented using go for lower memory footprint
 - configuration has changed slightly
 
