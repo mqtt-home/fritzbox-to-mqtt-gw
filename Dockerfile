@@ -3,7 +3,7 @@
 #
 #CMD ["/opt/app/index.js", "/var/lib/fritzbox-to-mqtt-gw/config.json"]
 
-FROM node:18.12-alpine
+FROM node:20.15-alpine
 COPY app/dist /opt/app/
 WORKDIR /opt/app/
 
