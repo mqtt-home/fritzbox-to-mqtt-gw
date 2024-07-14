@@ -10,28 +10,26 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
 
-      - name: Setup node
-        uses: actions/setup-node@v3
+      - uses: actions/setup-go@v5
         with:
-          node-version: 16.x
-
-      - name: Install
-        working-directory: app
-        run: |
-          npm install
-
-      - name: Lint/Test
-        working-directory: app
-        run: |
-          npm run lint
-          npm test
+          go-version: '1.22.5'
 
       - name: Build
         working-directory: app
         run: |
-          npm run build
+          go build .
 
-      - name: Build container
-        run: docker-compose build
+      - name: Build docker container and push
+        id: docker_build
+        uses: docker/build-push-action@v6
+        env:
+          RELEASE_VERSION: ${{ steps.next.outputs.version }}
+        with:
+          context: ./app
+          file: ./app/Dockerfile
+          platforms: linux/amd64
+          push: false
+          tags: |
+            pharndt/fritzboxmqtt:latest
