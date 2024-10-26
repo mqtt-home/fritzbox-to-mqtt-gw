@@ -43,6 +43,14 @@ Convert the FritzBox tr-064 data to MQTT messages.
           { "name": "Uptime" },
           { "name": "ConnectionStatus", "mapEnum": { "Connected": 1, "__default": 0 } }
         ]
+      },
+      {
+        "service": "urn:dslforum-org:service:Hosts:1",
+        "action": "GetSpecificHostEntry",
+        "args": [
+          { "name": "NewMACAddress", "value": "12:34:56:78:9A:BC" }
+        ],
+        "alias": "host1"
       }
     ]
   }
