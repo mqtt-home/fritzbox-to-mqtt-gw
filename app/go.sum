@@ -8,6 +8,8 @@ github.com/philipparndt/mqtt-gateway v1.3.0 h1:QeJ0XIEnlzH4Qm7vqAQN3WTrI45UcPxlc
 github.com/philipparndt/mqtt-gateway v1.3.0/go.mod h1:N6LC57xFs/u41Xc5csPHTACm/00GyOyMgIC+oOqp32Y=
 github.com/sberk42/fritzbox_exporter v0.0.0-20240409154313-846e73fa6fac h1:62a3NZoSSQ70PnvuLVbVzfC2XsxCzRfe5lLaWpWbp04=
 github.com/sberk42/fritzbox_exporter v0.0.0-20240409154313-846e73fa6fac/go.mod h1:fsdBVW7VERDYzGEuqvJRVUp+0rO8fo1vxdxu0ZVk20g=
+github.com/sberk42/fritzbox_exporter v0.0.0-20240828163925-4ff6c1a79919 h1:FrXXqJDmFz+9lNrRTMjoZm34+szEQiagGO/CXdLu8Mw=
+github.com/sberk42/fritzbox_exporter v0.0.0-20240828163925-4ff6c1a79919/go.mod h1:NfPGQ73gieQqzCbWeChPTouWbt/BloYFIfw8EbgebYE=
 golang.org/x/net v0.23.0 h1:7EYJ93RZ9vYSZAIb2x3lnuvqO5zneoD6IvWjuhfxjTs=
 golang.org/x/net v0.23.0/go.mod h1:JKghWKKOSdJwpW2GEx0Ja7fmaKnMsbu+MWVZTokSYmg=
 golang.org/x/sync v0.3.0 h1:ftCYgMx6zT/asHUrPw8BLLscYtGznsLAnjq5RH9P66E=
