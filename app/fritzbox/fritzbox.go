@@ -64,10 +64,23 @@ func LoadData(cfg config.Config) map[string]interface{} {
 						actionArg := fritzbox_upnp.ActionArgument{
 							Name: "",
 						}
+
+						if len(msg.Args) > 0 {
+							actionArg = fritzbox_upnp.ActionArgument{
+								Name:  msg.Args[0].Name,
+								Value: msg.Args[0].Value,
+							}
+						}
+
 						result, err := action.Call(&actionArg)
 						if err == nil {
 							for key, value := range result {
-								dataMap[key] = mapEnumValue(msg.Values, key, value)
+								keyName := key
+								if msg.Alias != "" {
+									keyName = msg.Alias + "." + key
+								}
+
+								dataMap[keyName] = mapEnumValue(msg.Values, key, value)
 							}
 						} else {
 							logger.Error("Error calling action", err)
