@@ -61,7 +61,7 @@ Convert the FritzBox tr-064 data to MQTT messages.
 
 ```json
 {
-  "ConnectionStatus": 1,
+  "ConnectionStatus": 0,
   "ConnectionTrigger": "AlwaysOn",
   "ConnectionType": "IP_Routed",
   "DNSEnabled": true,
@@ -70,7 +70,7 @@ Convert the FritzBox tr-064 data to MQTT messages.
   "Enable": true,
   "ExternalIPAddress": "xx.xx.xx.xx",
   "LastConnectionError": "ERROR_NONE",
-  "MACAddress": "xx:xx:xx:xx:xx:xx",
+  "MACAddress": "xx:xx:xx:xx:xx",
   "NATEnabled": true,
   "Name": "internet",
   "PossibleConnectionTypes": "IP_Routed, IP_Bridged",
@@ -78,7 +78,13 @@ Convert the FritzBox tr-064 data to MQTT messages.
   "RouteProtocolRx": "Off",
   "TotalBytesReceived": 812730036094,
   "TotalBytesSent": 164014571233,
-  "Uptime": 3801160
+  "Uptime": 3801160,
+  "host1.Active": true,
+  "host1.AddressSource": "DHCP",
+  "host1.HostName": "PC-xx-xx-xx-xx",
+  "host1.IPAddress": "xx.xx.xx.xx",
+  "host1.InterfaceType": "Ethernet",
+  "host1.LeaseTimeRemaining": 0
 }
 ```
 
