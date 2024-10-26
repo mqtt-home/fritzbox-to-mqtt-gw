@@ -11,6 +11,12 @@ type ValueMapping struct {
 	Name    string                 `json:"name"`
 	MapEnum map[string]interface{} `json:"mapEnum,omitempty"`
 }
+
+type Argument struct {
+	Name  string `json:"name"`
+	Value string `json:"value"`
+}
+
 type Fritzbox struct {
 	PollingInterval int    `json:"polling-interval"`
 	Host            string `json:"host"`
@@ -20,7 +26,9 @@ type Fritzbox struct {
 	Message         []struct {
 		Service string         `json:"service"`
 		Action  string         `json:"action"`
+		Args    []Argument     `json:"args"`
 		Values  []ValueMapping `json:"values"`
+		Alias   string         `json:"alias,omitempty"`
 	} `json:"message"`
 }
 
@@ -33,6 +41,14 @@ type Config struct {
 	MQTT     config.MQTTConfig `json:"mqtt"`
 	Fritzbox Fritzbox          `json:"fritzbox"`
 	LogLevel string            `json:"loglevel,omitempty"`
+}
+
+func (cfg Config) Validate() {
+	for _, msg := range cfg.Fritzbox.Message {
+		if len(msg.Args) > 1 {
+			panic("Currently only one argument is supported check configuration for " + msg.Service + " " + msg.Action)
+		}
+	}
 }
 
 func LoadConfig(file string) (Config, error) {
@@ -57,6 +73,8 @@ func LoadConfig(file string) (Config, error) {
 	if cfg.LogLevel == "" {
 		cfg.LogLevel = "info"
 	}
+
+	cfg.Validate()
 
 	return cfg, nil
 }
