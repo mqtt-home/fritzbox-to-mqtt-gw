@@ -1,8 +1,6 @@
 module github.com/mqtt-home/fritzbox-to-mqtt-gw
 
-go 1.22.6
-
-toolchain go1.23.2
+go 1.24.0
 
 require (
 	github.com/philipparndt/go-logger v1.0.0
@@ -11,8 +9,8 @@ require (
 )
 
 require (
-	github.com/eclipse/paho.mqtt.golang v1.4.3 // indirect
-	github.com/gorilla/websocket v1.5.0 // indirect
-	golang.org/x/net v0.23.0 // indirect
-	golang.org/x/sync v0.3.0 // indirect
+	github.com/eclipse/paho.mqtt.golang v1.5.1 // indirect
+	github.com/gorilla/websocket v1.5.3 // indirect
+	golang.org/x/net v0.44.0 // indirect
+	golang.org/x/sync v0.17.0 // indirect
 )
