@@ -10,6 +10,8 @@ github.com/sberk42/fritzbox_exporter v0.0.0-20240409154313-846e73fa6fac h1:62a3N
 github.com/sberk42/fritzbox_exporter v0.0.0-20240409154313-846e73fa6fac/go.mod h1:fsdBVW7VERDYzGEuqvJRVUp+0rO8fo1vxdxu0ZVk20g=
 github.com/sberk42/fritzbox_exporter v0.0.0-20240828163925-4ff6c1a79919 h1:FrXXqJDmFz+9lNrRTMjoZm34+szEQiagGO/CXdLu8Mw=
 github.com/sberk42/fritzbox_exporter v0.0.0-20240828163925-4ff6c1a79919/go.mod h1:NfPGQ73gieQqzCbWeChPTouWbt/BloYFIfw8EbgebYE=
+github.com/sberk42/fritzbox_exporter v0.0.0-20260723201137-50ebd8ff4588 h1:b+K/L0MCKYNmBNjocMF+SzBkqlpSdlQXeNxgMbnoLsI=
+github.com/sberk42/fritzbox_exporter v0.0.0-20260723201137-50ebd8ff4588/go.mod h1:jcvNcg4qFSU7Jcgz7984mfJFOiusWWK4mnnSeOQ1vaI=
 golang.org/x/net v0.23.0 h1:7EYJ93RZ9vYSZAIb2x3lnuvqO5zneoD6IvWjuhfxjTs=
 golang.org/x/net v0.23.0/go.mod h1:JKghWKKOSdJwpW2GEx0Ja7fmaKnMsbu+MWVZTokSYmg=
 golang.org/x/sync v0.3.0 h1:ftCYgMx6zT/asHUrPw8BLLscYtGznsLAnjq5RH9P66E=
