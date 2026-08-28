@@ -23,7 +23,7 @@ jobs:
 
       - name: Build docker container and push
         id: docker_build
-        uses: docker/build-push-action@v6
+        uses: docker/build-push-action@v7
         env:
           RELEASE_VERSION: ${{ steps.next.outputs.version }}
         with:
