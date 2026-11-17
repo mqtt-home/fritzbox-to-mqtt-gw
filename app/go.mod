@@ -5,7 +5,7 @@ go 1.24.0
 require (
 	github.com/philipparndt/go-logger v1.0.0
 	github.com/philipparndt/mqtt-gateway v1.11.0
-	github.com/sberk42/fritzbox_exporter v0.0.0-20240828163925-4ff6c1a79919
+	github.com/sberk42/fritzbox_exporter v1.0
 )
 
 require (
